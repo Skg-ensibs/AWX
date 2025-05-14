@@ -1,0 +1,9 @@
+---
+- name: Simple Echo Playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Echo Hello
+      ansible.builtin.shell: echo "Hello from AWX!"
+    - name: Echo date
+      ansible.builtin.shell: date

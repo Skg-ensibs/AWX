@@ -1,9 +1,20 @@
 ---
-- name: Simple Echo Playbook
+- name: Juste des echos
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Echo Hello
-      ansible.builtin.shell: echo "Hello from AWX!"
-    - name: Echo date
-      ansible.builtin.shell: date
+    - name: Echo hello
+      ansible.builtin.shell: echo "Hello from AWX"
+      register: result_hello
+
+    - name: Affiche le résultat
+      ansible.builtin.debug:
+        var: result_hello.stdout
+
+    - name: Echo done
+      ansible.builtin.shell: echo "All done!"
+      register: result_done
+
+    - name: Affiche le done
+      ansible.builtin.debug:
+        var: result_done.stdout

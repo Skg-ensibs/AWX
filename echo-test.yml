@@ -1,24 +1,21 @@
 ---
-- name: Simuler l'activation des services au démarrage
+- name: Juste des echos
   hosts: localhost
   gather_facts: false
-
-  vars:
-    services:
-      - name: nginx
-      - name: apache2
-
   tasks:
+    - name: Echo hello
+      ansible.builtin.shell: echo "Hello from AWX"
+      register: result_hello
 
-    - name: Simuler l'activation de chaque service
-      ansible.builtin.command: "echo Enabling service {{ item.name }}"
-      loop: "{{ services }}"
-      register: service_results
-      changed_when: true  # Pour forcer l'état "changed", même si c'est un echo
-
-    - name: Afficher les messages d'activation des services
+    - name: Affiche le résultat
       ansible.builtin.debug:
-        msg: "Service {{ item.item.name }} activé"
-      loop: "{{ service_results.results }}"
-      loop_control:
-        label: "{{ item.item.name }}"
+        var: result_hello.stdout
+
+    - name: Echo done
+      ansible.builtin.shell: echo "All done!"
+      register: result_done
+      
+
+    - name: Affiche le done
+      ansible.builtin.debug:
+        var: result_done.stdout

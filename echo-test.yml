@@ -1,18 +1,24 @@
 ---
-- name: Simulate enabling services at startup
+- name: Simuler l'activation des services au démarrage
   hosts: localhost
   gather_facts: false
-  tasks:
-    - name: Simulate enabling services
-      ansible.builtin.command: "{{ item.cmd }}"
-      loop:
-        - { cmd: "echo Enabling service nginx", msg: "Service nginx enabled" }
-        - { cmd: "echo Enabling service apache2", msg: "Service apache2 enabled" }
-      register: service_results
 
-    - name: Display service activation messages
+  vars:
+    services:
+      - name: nginx
+      - name: apache2
+
+  tasks:
+
+    - name: Simuler l'activation de chaque service
+      ansible.builtin.command: "echo Enabling service {{ item.name }}"
+      loop: "{{ services }}"
+      register: service_results
+      changed_when: true  # Pour forcer l'état "changed", même si c'est un echo
+
+    - name: Afficher les messages d'activation des services
       ansible.builtin.debug:
-        msg: "{{ item.item.msg }}"
+        msg: "Service {{ item.item.name }} activé"
       loop: "{{ service_results.results }}"
       loop_control:
-        label: "{{ item.item.msg }}"
+        label: "{{ item.item.name }}"

@@ -1,20 +1,18 @@
 ---
-- name: Juste des echos
+- name: Simulate enabling services at startup
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Echo hello
-      ansible.builtin.shell: echo "Hello from AWX"
-      register: result_hello
+    - name: Simulate enabling services
+      ansible.builtin.command: "{{ item.cmd }}"
+      loop:
+        - { cmd: "echo Enabling service nginx", msg: "Service nginx enabled" }
+        - { cmd: "echo Enabling service apache2", msg: "Service apache2 enabled" }
+      register: service_results
 
-    - name: Affiche le résultat
+    - name: Display service activation messages
       ansible.builtin.debug:
-        var: result_hello.stdout
-
-    - name: Echo done
-      ansible.builtin.shell: echo "All done!"
-      register: result_done
-
-    - name: Affiche le done
-      ansible.builtin.debug:
-        var: result_done.stdout
+        msg: "{{ item.item.msg }}"
+      loop: "{{ service_results.results }}"
+      loop_control:
+        label: "{{ item.item.msg }}"

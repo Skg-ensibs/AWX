@@ -1,0 +1,28 @@
+---
+- name: Installation du serveur mail Postfix (avec variables)
+  hosts: all
+  become: yes
+  vars:
+    config_file_path: "/tmp/main.cf_simule"
+
+  tasks:
+    - name: Simuler installation de Postfix
+      shell: "echo 'Installation de Postfix sur {{ mail_hostname }} ({{ mail_domain }})'; sleep 1"
+      changed_when: true
+
+    - name: Générer fichier de configuration
+      shell: |
+        echo "myhostname = {{ mail_hostname }}" > {{ config_file_path }}
+        echo "mydomain = {{ mail_domain }}" >> {{ config_file_path }}
+        echo "myorigin = $mydomain" >> {{ config_file_path }}
+        echo "relayhost = " >> {{ config_file_path }}
+        sleep 1
+      changed_when: true
+
+    - name: Simuler envoi de mail test
+      shell: "echo 'Mail de test envoyé à {{ admin_email }}'; sleep 1"
+      changed_when: true
+
+    - name: Fin de l'installation
+      shell: "echo 'Postfix installé et configuré avec succès pour {{ mail_domain }}'"
+      changed_when: false

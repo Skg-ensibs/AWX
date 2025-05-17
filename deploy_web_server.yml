@@ -1,0 +1,41 @@
+---
+- name: Déploiement d’un serveur web
+  hosts: all
+  gather_facts: false
+
+  vars:
+    web_server: "nginx"             # nginx ou apache
+    document_root: "/var/www/html"
+    server_name: "exemple.local"
+    enable_ssl: false
+
+  tasks:
+
+    - name: [1/6] Détection du type de serveur web à déployer
+      shell: |
+        echo "Serveur web sélectionné : {{ web_server | upper }}"
+        sleep 1
+      changed_when: true
+
+    - name: [2/6] Installation de {{ web_server }}
+      shell: |
+        echo "Installation du paquet {{ web_server }}..."
+        sleep 1
+      changed_when: true
+
+    - name: [3/6] Configuration du virtual host
+      shell: |
+        echo "Configuration du virtual host pour {{ server_name }} dans {{ document_root }}"
+        sleep 1
+      changed_when: true
+
+    - name: [4/6] Activation du site et redémarrage du service
+      shell: |
+        echo "Activation du site et redémarrage du service {{ web_server }}"
+        sleep 1
+      changed_when: true
+
+    - name: [5/5] Le site {{ server_name }} est accessible
+      shell: |
+        echo "Déploiement terminé : http{{ 's' if enable_ssl else '' }}://{{ server_name }}"
+      changed_when: false

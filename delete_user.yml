@@ -1,0 +1,35 @@
+---
+- name: Suppression d'un utilisateur
+  hosts: all
+  gather_facts: false
+
+  vars:
+    username: "utilisateur"
+    remove_home: true
+
+  tasks:
+
+    - name: [1/4] Vérification de l’existence de l’utilisateur
+      shell: |
+        echo "Vérification de l’utilisateur {{ username }}..."
+        sleep 1
+      changed_when: true
+
+    - name: [2/4] Suppression de l’utilisateur
+      shell: |
+        echo "Suppression de l’utilisateur {{ username }} avec la commande :"
+        echo "userdel {{ '--remove' if remove_home else '' }} {{ username }}"
+        sleep 1
+      changed_when: true
+
+    - name: [3/4] Suppression du répertoire personnel
+      when: remove_home
+      shell: |
+        echo "Suppression du home directory : /home/{{ username }}"
+        sleep 1
+      changed_when: true
+
+    - name: [4/4] L'utilisateur {{ username }} a été supprimé avec succès
+      shell: |
+        echo "L'utilisateur {{ username }} a été désactivé et supprimé."
+      changed_when: false

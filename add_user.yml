@@ -1,0 +1,42 @@
+---
+- name: Ajout d'un utilisateur
+  hosts: all
+  gather_facts: false
+
+  vars:
+    username: "nouvelutilisateur"
+    full_name: "Alice Dupont"
+    groups: ["utilisateurs"]
+    create_home: true
+
+  tasks:
+
+    - name: [1/5] Vérification des informations de l’utilisateur
+      shell: |
+        echo "Création de l’utilisateur : {{ username }} ({{ full_name }})"
+        sleep 1
+      changed_when: true
+
+    - name: [2/5] Création de compte système
+      shell: |
+        echo "useradd {{ username }} {{ '--create-home' if create_home else '' }} -c '{{ full_name }}'"
+        sleep 1
+      changed_when: true
+
+    - name: [3/5] Ajout aux groupes secondaires
+      shell: |
+        echo "Ajout de {{ username }} aux groupes : {{ groups | join(', ') }}"
+        sleep 1
+      changed_when: true
+
+    - name: [4/5] Création du répertoire personnel
+      when: create_home
+      shell: |
+        echo "Création du home directory : /home/{{ username }}"
+        sleep 1
+      changed_when: true
+
+    - name: [5/5] L'utilisateur {{ username }} a été ajouté avec succès
+      shell: |
+        echo "L'utilisateur {{ username }} est maintenant actif sur le système."
+      changed_when: false

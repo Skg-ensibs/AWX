@@ -1,7 +1,6 @@
 ---
 - name: Installation du serveur mail Postfix (avec variables)
   hosts: all
-  become: yes
   vars:
     config_file_path: "/tmp/main.cf_simule"
 

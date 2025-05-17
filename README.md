@@ -1,30 +1,33 @@
 Lorsque AWX est installé faut créer un project qui lui dit ou se trouve les .yml : 
 
+```
 awx project create \
   --name "SIMON" \
   --organization "Default" \
   --scm_type "" \
   --local_path "PATH"
-
+```
 
 
 Commande pour créer les jobs templates en cli : 
-
+```
 awx job_template create \
   --name "<Nom du template>" \
   --inventory "<Nom de l'inventaire>" \
   --project "<Nom du projet>" \
   --playbook "<fichier.yml>" \
   --extra-vars '{"clé1": "valeur1", "clé2": "valeur2"}'
-Perso sur mon je mettais ça :
+```
 
+Perso sur mon je mettais ça :
+```
 awx --conf.host http://127.0.0.1:8080 --conf.token yPLLeIEXMVoEImY2Qh0ixIG78puxQA job_template create \
   --name "<Nom du template>" \
   --inventory "<Nom de l'inventaire>" \
   --project "<Nom du projet>" \
   --playbook "<fichier.yml>" \
   --extra-vars '{"clé1": "valeur1", "clé2": "valeur2"}'
-
+```
 
   Maintenant ce qui suit c'est les tous ceux à lancer :
 

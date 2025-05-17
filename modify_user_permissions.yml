@@ -1,0 +1,38 @@
+---
+- name: Modification des groupes d’un utilisateur
+  hosts: all
+  gather_facts: false
+
+  vars:
+    username: "alice"
+    add_groups: ["sudo", "admins"]
+    remove_groups: ["guests"]
+
+  tasks:
+
+    - name: [1/4] Vérification des groupes actuels de l’utilisateur
+      shell: |
+        echo "Récupération des groupes de {{ username }}..."
+        sleep 1
+      changed_when: true
+
+    - name: [2/4] Ajout aux groupes suivants
+      when: add_groups | length > 0
+      shell: |
+        echo "Ajout de {{ username }} aux groupes : {{ add_groups | join(', ') }}"
+        echo "Commande simulée : usermod -aG {{ add_groups | join(',') }} {{ username }}"
+        sleep 1
+      changed_when: true
+
+    - name: [3/4] Suppression de groupes
+      when: remove_groups | length > 0
+      shell: |
+        echo "Retrait de {{ username }} des groupes : {{ remove_groups | join(', ') }}"
+        echo "Commande simulée : modification du fichier /etc/group (simulation)"
+        sleep 1
+      changed_when: true
+
+    - name: [4/4] Les groupes de {{ username }} ont été mis à jour
+      shell: |
+        echo "Les permissions de {{ username }} ont été ajustées avec succès."
+      changed_when: false

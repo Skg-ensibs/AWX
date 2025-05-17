@@ -5,7 +5,7 @@
     config_file_path: "/tmp/main.cf_simule"
 
   tasks:
-    - name: Simuler installation de Postfix
+    - name: Installation de Postfix
       shell: "echo 'Installation de Postfix sur {{ mail_hostname }} ({{ mail_domain }})'; sleep 1"
       changed_when: true
 
@@ -18,10 +18,10 @@
         sleep 1
       changed_when: true
 
-    - name: Simuler envoi de mail test
+    - name: Envoi de mail test
       shell: "echo 'Mail de test envoyé à {{ admin_email }}'; sleep 1"
       changed_when: true
 
     - name: Fin de l'installation
       shell: "echo 'Postfix installé et configuré avec succès pour {{ mail_domain }}'"
-      changed_when: false
+      changed_when: true

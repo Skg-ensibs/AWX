@@ -12,38 +12,38 @@
 
   tasks:
 
-    - name: [1/6] Préparation du répertoire de partage
+    - name: Préparation du répertoire de partage
       shell: |
         echo "Création du dossier {{ share_path }} (simulation)..."
         sleep 1
       changed_when: true
 
-    - name: [2/6] Choix du protocole de partage
+    - name: Choix du protocole de partage
       shell: |
         echo "Utilisation du protocole : {{ protocol | upper }}"
         sleep 1
       changed_when: true
 
-    - name: [3/6] Configuration {{ protocol }}
+    - name: Configuration {{ protocol }}
       shell: |
         echo "Configuration simulée de {{ protocol }} pour le partage {{ share_name }} sur {{ share_path }}"
         sleep 1
       changed_when: true
 
-    - name: [4/6] Attribution des droits d'accès
+    - name: Attribution des droits d'accès
       shell: |
         echo "Accès autorisé pour : {{ allowed_users | join(', ') }}"
         echo "Mode : {{ 'Lecture seule' if read_only else 'Lecture/Écriture' }}"
         sleep 1
       changed_when: true
 
-    - name: [5/6] Rechargement du service {{ protocol }}
+    - name: Rechargement du service {{ protocol }}
       shell: |
         echo "Rechargement du service {{ protocol }} (simulation)..."
         sleep 1
       changed_when: true
 
-    - name: [6/6] Partage {{ share_name }} disponible sur {{ share_path }}
+    - name: Partage {{ share_name }} disponible sur {{ share_path }}
       shell: |
         echo "Le partage {{ share_name }} est actif via {{ protocol }}."
       changed_when: false

@@ -13,37 +13,37 @@
 
   tasks:
 
-    - name: [1/6] Préparation de l’environnement de partage
+    - name: Préparation de l’environnement de partage
       shell: |
         echo "Création du dossier {{ share_path }} (simulation)..."
         sleep 1
       changed_when: true
 
-    - name: [2/6] Attribution des droits d'accès
+    - name: Attribution des droits d'accès
       shell: |
         echo "Attribution des permissions {{ access_mode }} à {{ allowed_users | join(', ') }}"
         sleep 1
       changed_when: true
 
-    - name: [3/6] Simulation de configuration du service de partage
+    - name: Simulation de configuration du service de partage
       shell: |
         echo "Configuration simulée de Samba/NFS pour le dossier {{ share_name }}"
         sleep 1
       changed_when: true
 
-    - name: [4/6] Ajout des utilisateurs au service de partage
+    - name: Ajout des utilisateurs au service de partage
       shell: |
         echo "Ajout simulé des utilisateurs : {{ allowed_users | join(', ') }}"
         sleep 1
       changed_when: true
 
-    - name: [5/6] Démarrage simulé du service de partage
+    - name: Démarrage simulé du service de partage
       shell: |
         echo "Lancement du service de partage {{ share_name }}..."
         sleep 1
       changed_when: true
 
-    - name: [6/6] Le partage {{ share_name }} est disponible sur {{ share_path }}
+    - name: Le partage {{ share_name }} est disponible sur {{ share_path }}
       shell: |
         echo "Partage réseau {{ share_name }} prêt à l’emploi (mode {{ access_mode }})"
       changed_when: false

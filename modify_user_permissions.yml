@@ -10,13 +10,13 @@
 
   tasks:
 
-    - name: [1/4] Vérification des groupes actuels de l’utilisateur
+    - name: Vérification des groupes actuels de l’utilisateur
       shell: |
         echo "Récupération des groupes de {{ username }}..."
         sleep 1
       changed_when: true
 
-    - name: [2/4] Ajout aux groupes suivants
+    - name: Ajout aux groupes suivants
       when: add_groups | length > 0
       shell: |
         echo "Ajout de {{ username }} aux groupes : {{ add_groups | join(', ') }}"
@@ -24,7 +24,7 @@
         sleep 1
       changed_when: true
 
-    - name: [3/4] Suppression de groupes
+    - name: Suppression de groupes
       when: remove_groups | length > 0
       shell: |
         echo "Retrait de {{ username }} des groupes : {{ remove_groups | join(', ') }}"
@@ -32,7 +32,7 @@
         sleep 1
       changed_when: true
 
-    - name: [4/4] Les groupes de {{ username }} ont été mis à jour
+    - name: Les groupes de {{ username }} ont été mis à jour
       shell: |
         echo "Les permissions de {{ username }} ont été ajustées avec succès."
       changed_when: false

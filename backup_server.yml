@@ -13,38 +13,38 @@
 
   tasks:
 
-    - name: [1/6] Vérification de l’espace disque disponible
+    - name: Vérification de l’espace disque disponible
       shell: |
         echo "Espace disque disponible sur la destination {{ backup_destination }} (simulation)..."
         sleep 1
       changed_when: true
 
-    - name: [2/6] Préparation du répertoire de destination
+    - name: Préparation du répertoire de destination
       shell: |
         echo "Création du répertoire {{ backup_destination }} si nécessaire (simulation)..."
         sleep 1
       changed_when: true
 
-    - name: [3/6] Sauvegarde des dossiers sources
+    - name: Sauvegarde des dossiers sources
       shell: |
         echo "Sauvegarde simulée des dossiers : {{ backup_sources | join(', ') }}"
         sleep 2
       changed_when: true
 
-    - name: [4/6] Compression de l’archive de sauvegarde
+    - name: Compression de l’archive de sauvegarde
       when: compress_backup
       shell: |
         echo "Compression de l’archive de sauvegarde (simulation)..."
         sleep 1
       changed_when: true
 
-    - name: [5/6] Nettoyage des sauvegardes plus anciennes que {{ retention_days }} jours
+    - name: Nettoyage des sauvegardes plus anciennes que {{ retention_days }} jours
       shell: |
         echo "Suppression simulée des archives de plus de {{ retention_days }} jours"
         sleep 1
       changed_when: true
 
-    - name: [6/6] Sauvegarde terminée avec succès
+    - name: Sauvegarde terminée avec succès
       shell: |
         echo "La sauvegarde est terminée et disponible dans {{ backup_destination }}"
       changed_when: false

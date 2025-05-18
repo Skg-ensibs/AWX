@@ -10,20 +10,20 @@
 
   tasks:
 
-    - name: [1/5] Détection de la distribution système
+    - name: Détection de la distribution système
       shell: |
         echo "Système détecté : {{ os_family | capitalize }}"
         sleep 1
       changed_when: true
 
-    - name: [2/5] Mise à jour des index de paquets
+    - name: Mise à jour des index de paquets
       shell: |
         echo "{{ 'apt update' if os_family == 'debian' else 'yum check-update' }}"
         echo "Mise à jour des index de paquets..."
         sleep 1
       changed_when: true
 
-    - name: [3/5] Mise à jour des paquets installés
+    - name: Mise à jour des paquets installés
       shell: |
         echo "{{ 'apt upgrade -y' if os_family == 'debian' else 'yum upgrade -y' }}"
         echo "Mise à jour des paquets installés en cours..."
@@ -31,13 +31,13 @@
       when: perform_upgrade
       changed_when: true
 
-    - name: [4/5] Vérification des redémarrages requis
+    - name: Vérification des redémarrages requis
       shell: |
         echo "Vérification : redémarrage requis ? => {{ reboot_if_required }}"
         sleep 1
       changed_when: true
 
-    - name: [5/5] Redémarrage simulé du système
+    - name: Redémarrage simulé du système
       when: reboot_if_required
       shell: |
         echo "Redémarrage du système simulé..."

@@ -1,5 +1,5 @@
 ---
-- name: Déploiement simulé d’une infrastructure personnalisée
+- name: Déploiement d’une infrastructure personnalisée
   hosts: all
   gather_facts: false
 
@@ -11,6 +11,10 @@
     Reponse_5: "Non"
     Reponse_6: "Non"
     Reponse_7: "Oui"
+    AWX_HOST: "http://127.0.0.1:8080"
+    AWX_TOKEN: "yPLLeIEXMVoEImY2Qh0ixIG78puxQA"
+    INVENTORY: "TPE-Inventaire"
+    PROJECT: "SIMON"
 
   tasks:
 
@@ -21,59 +25,67 @@
           - Postes : {{ Reponse_2 }}
           - Domaine : {{ Reponse_3 }}
 
-    - name: Configuration du domaine (simulation)
+    - name: Simulation de la configuration du domaine
       debug:
-        msg: "Simulation de la configuration du domaine {{ Reponse_3 }}..."
+        msg: |
+          **Étape 1**: Configuration du domaine {{ Reponse_3 }}
+          - Domaine configuré avec succès (simulation).
       changed_when: true
 
     - name: Affichage résultat domaine
       debug:
-        msg: "Domaine {{ Reponse_3 }} configuré (simulation)."
+        msg: |
+          - Domaine configuré : {{ Reponse_3 }}
+          - Résultat : Configuré avec succès (simulation)
 
     - name: Gestion serveur FTP (simulation)
       debug:
         msg: |
+          **Étape 2**: Gestion du serveur FTP
           {% if Reponse_4 | lower == "oui" %}
-          Simulation du déploiement du serveur FTP.
+          - Serveur FTP déployé (simulation).
           {% else %}
-          Pas de déploiement de serveur FTP nécessaire.
+          - Aucun déploiement de serveur FTP nécessaire.
           {% endif %}
       changed_when: true
 
     - name: Gestion serveur Web (simulation)
       debug:
         msg: |
+          **Étape 3**: Gestion du serveur Web
           {% if Reponse_5 | lower == "oui" %}
-          Simulation du déploiement du serveur web.
+          - Serveur Web déployé (simulation).
           {% else %}
-          Pas de déploiement de serveur Web nécessaire.
+          - Aucun déploiement de serveur Web nécessaire.
           {% endif %}
       changed_when: true
 
     - name: Gestion serveur Mail (simulation)
       debug:
         msg: |
+          **Étape 4**: Gestion du serveur Mail
           {% if Reponse_6 | lower == "oui" %}
-          Simulation du déploiement du serveur mail.
+          - Serveur Mail déployé (simulation).
           {% else %}
-          Pas de déploiement de serveur mail nécessaire.
+          - Aucun déploiement de serveur Mail nécessaire.
           {% endif %}
       changed_when: true
 
     - name: Gestion supervision (SIEM) (simulation)
       debug:
         msg: |
+          **Étape 5**: Gestion de la supervision (SIEM)
           {% if Reponse_7 | lower == "oui" %}
-          Simulation du déploiement de la supervision avec Zabbix.
+          - Supervision déployée avec Zabbix (simulation).
           {% else %}
-          Pas de déploiement de SIEM nécessaire.
+          - Aucune supervision (SIEM) déployée.
           {% endif %}
       changed_when: true
 
     - name: Résumé final de la simulation
       debug:
         msg: |
-          Résumé des composants simulés :
+          **Résumé final des composants simulés** :
           - Domaine : {{ Reponse_3 }}
           - FTP     : {{ 'Simulation déployée' if Reponse_4 | lower == 'oui' else 'Non déployé' }}
           - Web     : {{ 'Simulation déployée' if Reponse_5 | lower == 'oui' else 'Non déployé' }}

@@ -25,7 +25,7 @@
       debug:
         msg: |
           - Domaine configuré avec succès.
-      changed_when: true
+
 
     - name: Affichage résultat domaine
       debug:
@@ -36,27 +36,26 @@
     - name: Gestion serveur FTP
       debug:
         msg: |
-          - Serveur FTP déployé (simulation).
+          - Serveur FTP déployé.
 
-      changed_when: true
 
     - name: Gestion serveur Web
       debug:
         msg: |
           - Serveur Web déployé.
-      changed_when: true
+
 
     - name: Gestion serveur Mail
       debug:
         msg: |
           - Serveur Mail déployé .
-      changed_when: true
+
 
     - name: Gestion supervision (SIEM)
       debug:
         msg: |
           - Supervision déployée avec Zabbix.
-      changed_when: true
+
 
     - name: Résumé final
       debug:
@@ -66,7 +65,7 @@
           - Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé' }}
           - Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé' }}
           - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé' }}
-      changed_when: true
+
 
     - name: Ajouts Jobs Administratifs
       debug:

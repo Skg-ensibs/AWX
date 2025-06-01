@@ -11,6 +11,10 @@
     Reponse_5: "Non"
     Reponse_6: "Non"
     Reponse_7: "Oui"
+    AWX_HOST: "http://127.0.0.1:8080"
+    AWX_TOKEN: "yPLLeIEXMVoEImY2Qh0ixIG78puxQA"
+    INVENTORY: "TPE-Inventaire"
+    PROJECT: "SIMON"
 
   tasks:
 
@@ -85,20 +89,17 @@
           - Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé ' }}
           - Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé ' }}
           - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé ' }}
+
     - name: Ajouts Jobs Administratifs
       shell: |
-        AWX_HOST="http://127.0.0.1:8080"
-        AWX_TOKEN="yPLLeIEXMVoEImY2Qh0ixIG78puxQA"
-        INVENTORY="TPE-Inventaire"
-        PROJECT="SIMON"
-
-        awx --conf.host $AWX_HOST --conf.token $AWX_TOKEN job_template create \
+        echo "Lancer l'ajout des jobs administratifs..."
+        awx --conf.host {{ AWX_HOST }} --conf.token {{ AWX_TOKEN }} job_template create \
           --name "Déploiement partage fichiers" \
-          --inventory "$INVENTORY" \
-          --project "$PROJECT" \
+          --inventory "{{ INVENTORY }}" \
+          --project "{{ PROJECT }}" \
           --playbook "deploy_file_share.yml" \
           --extra_vars '{"share_name": "documents", "share_path": "/srv/documents", "allowed_users": ["jean", "julie"], "access_mode": "rw"}' \
-          --ask_variables_on_launch true
+          --ask_variables_on_launch true -v
       register: awx_result
       changed_when: true
 

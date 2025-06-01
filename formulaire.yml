@@ -93,6 +93,7 @@
     - name: Ajouts Jobs Administratifs
       shell: |
         echo "Lancer l'ajout des jobs administratifs..."
+        whoami
         awx --conf.host {{ AWX_HOST }} --conf.token {{ AWX_TOKEN }} job_template create \
           --name "Déploiement partage fichiers" \
           --inventory "{{ INVENTORY }}" \

@@ -92,7 +92,6 @@
 
     - name: Ajouts Jobs Administratifs
       shell: |
-        echo "Lancer l'ajout des jobs administratifs..."
         whoami
       register: awx_result
       changed_when: true

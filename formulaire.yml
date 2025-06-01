@@ -94,13 +94,6 @@
       shell: |
         echo "Lancer l'ajout des jobs administratifs..."
         whoami
-        awx --conf.host {{ AWX_HOST }} --conf.token {{ AWX_TOKEN }} job_template create \
-          --name "Déploiement partage fichiers" \
-          --inventory "{{ INVENTORY }}" \
-          --project "{{ PROJECT }}" \
-          --playbook "deploy_file_share.yml" \
-          --extra_vars '{"share_name": "documents", "share_path": "/srv/documents", "allowed_users": ["jean", "julie"], "access_mode": "rw"}' \
-          --ask_variables_on_launch true -v
       register: awx_result
       changed_when: true
 

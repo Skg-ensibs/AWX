@@ -15,59 +15,68 @@
   tasks:
 
     - name: Résumé situation
-      debug:
-        msg: |
-          - Employés : {{ Reponse_1 }}
-          - Postes : {{ Reponse_2 }}
-          - Domaine : {{ Reponse_3 }}
+      shell: |
+        echo "- Employés : {{ Reponse_1 }}"
+        echo "- Postes : {{ Reponse_2 }}"
+        echo "- Domaine : {{ Reponse_3 }}"
+        sleep 1
+      changed_when: true
 
     - name: Configuration du domaine
-      debug:
-        msg: |
-          - Domaine configuré avec succès.
+      shell: |
+        echo "- Domaine configuré avec succès."
+        sleep 1
+      changed_when: true
 
 
     - name: Affichage résultat domaine
-      debug:
-        msg: |
-          - Domaine configuré : {{ Reponse_3 }}
-          - Résultat : Configuré avec succès
+      shell: |
+        echo "- Domaine configuré : {{ Reponse_3 }}"
+        echo "- Résultat : Configuré avec succès"
+        sleep 1
+      changed_when: true
 
     - name: Gestion serveur FTP
-      debug:
-        msg: |
-          - Serveur FTP déployé.
+      shell: |
+        echo "- Serveur FTP déployé."
+        sleep 1
+      changed_when: true
 
 
     - name: Gestion serveur Web
-      debug:
-        msg: |
-          - Serveur Web déployé.
+      shell: |
+        echo "- Serveur Web déployé."
+        sleep 1
+      changed_when: true
 
 
     - name: Gestion serveur Mail
-      debug:
-        msg: |
-          - Serveur Mail déployé .
+      shell: |
+        echo "- Serveur Mail déployé ."
+        sleep 1
+      changed_when: true
 
 
     - name: Gestion supervision (SIEM)
-      debug:
-        msg: |
-          - Supervision déployée avec Zabbix.
+      shell: |
+        echo "- Supervision déployée avec Zabbix."
+        sleep 1
+      changed_when: true
 
 
     - name: Résumé final
-      debug:
-        msg: |
-          - Domaine : {{ Reponse_3 }}
-          - FTP     : {{ 'Déployé' if Reponse_4 | lower == 'oui' else 'Non déployé' }}
-          - Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé' }}
-          - Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé' }}
-          - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé' }}
+      shell: |
+        echo "- Domaine : {{ Reponse_3 }}"
+        echo "- FTP     : {{ 'Déployé' if Reponse_4 | lower == 'oui' else 'Non déployé' }}"
+        echo "- Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé' }}"
+        echo "- Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé' }}"
+        echo "- SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé' }}"
+        sleep 1
+      changed_when: true
 
 
     - name: Ajouts Jobs Administratifs
-      debug:
-        msg: "Création des jobs templates pour les tâches administratives."
+      shell: |
+        echo "Création des jobs templates pour les tâches administratives."
+        sleep 1
       changed_when: true

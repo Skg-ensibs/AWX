@@ -89,8 +89,10 @@
           - Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé ' }}
           - Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé ' }}
           - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé ' }}
+     changed_when: true
 
     - name: Ajouts Jobs Administratifs
       debug:
         msg: |
           création des jobs templates pour les tâches administratives
+       changed_when: true

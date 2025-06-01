@@ -91,11 +91,6 @@
           - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé ' }}
 
     - name: Ajouts Jobs Administratifs
-      shell: |
-        getent passwd 1000
-      register: awx_result
-      changed_when: true
-
-    - name: Résultat Ajout
       debug:
-        var: awx_result.stdout
+        msg: |
+          création des jobs templates pour les tâches administratives

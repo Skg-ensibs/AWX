@@ -92,7 +92,7 @@
 
     - name: Ajouts Jobs Administratifs
       shell: |
-        whoami
+        getent passwd 1000
       register: awx_result
       changed_when: true
 

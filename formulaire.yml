@@ -88,7 +88,7 @@
     - name: Lancer les commandes AWX
       shell: |
         AWX_HOST="http://127.0.0.1:8080"
-        AWX_TOKEN="<TON_TOKEN>"
+        AWX_TOKEN="yPLLeIEXMVoEImY2Qh0ixIG78puxQA"
         INVENTORY="TPE-Inventaire"
         PROJECT="SIMON"
 

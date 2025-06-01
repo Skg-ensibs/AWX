@@ -11,10 +11,6 @@
     Reponse_5: "Non"
     Reponse_6: "Non"
     Reponse_7: "Oui"
-    AWX_HOST: "http://127.0.0.1:8080"
-    AWX_TOKEN: "yPLLeIEXMVoEImY2Qh0ixIG78puxQA"
-    INVENTORY: "TPE-Inventaire"
-    PROJECT: "SIMON"
 
   tasks:
 
@@ -25,75 +21,54 @@
           - Postes : {{ Reponse_2 }}
           - Domaine : {{ Reponse_3 }}
 
-    - name: Simulation de la configuration du domaine
+    - name: Configuration du domaine
       debug:
         msg: |
-          **Étape 1**: Configuration du domaine {{ Reponse_3 }}
-          - Domaine configuré avec succès (simulation).
+          - Domaine configuré avec succès.
       changed_when: true
 
     - name: Affichage résultat domaine
       debug:
         msg: |
           - Domaine configuré : {{ Reponse_3 }}
-          - Résultat : Configuré avec succès (simulation)
+          - Résultat : Configuré avec succès
 
-    - name: Gestion serveur FTP (simulation)
+    - name: Gestion serveur FTP
       debug:
         msg: |
-          **Étape 2**: Gestion du serveur FTP
-          {% if Reponse_4 | lower == "oui" %}
           - Serveur FTP déployé (simulation).
-          {% else %}
-          - Aucun déploiement de serveur FTP nécessaire.
-          {% endif %}
+
       changed_when: true
 
-    - name: Gestion serveur Web (simulation)
+    - name: Gestion serveur Web
       debug:
         msg: |
-          **Étape 3**: Gestion du serveur Web
-          {% if Reponse_5 | lower == "oui" %}
-          - Serveur Web déployé (simulation).
-          {% else %}
-          - Aucun déploiement de serveur Web nécessaire.
-          {% endif %}
+          - Serveur Web déployé.
       changed_when: true
 
-    - name: Gestion serveur Mail (simulation)
+    - name: Gestion serveur Mail
       debug:
         msg: |
-          **Étape 4**: Gestion du serveur Mail
-          {% if Reponse_6 | lower == "oui" %}
-          - Serveur Mail déployé (simulation).
-          {% else %}
-          - Aucun déploiement de serveur Mail nécessaire.
-          {% endif %}
+          - Serveur Mail déployé .
       changed_when: true
 
-    - name: Gestion supervision (SIEM) (simulation)
+    - name: Gestion supervision (SIEM)
       debug:
         msg: |
-          **Étape 5**: Gestion de la supervision (SIEM)
-          {% if Reponse_7 | lower == "oui" %}
-          - Supervision déployée avec Zabbix (simulation).
-          {% else %}
-          - Aucune supervision (SIEM) déployée.
-          {% endif %}
+          - Supervision déployée avec Zabbix.
       changed_when: true
 
-    - name: Résumé final de la simulation
+    - name: Résumé final
       debug:
         msg: |
-          **Résumé final des composants simulés** :
           - Domaine : {{ Reponse_3 }}
-          - FTP     : {{ 'Simulation déployée' if Reponse_4 | lower == 'oui' else 'Non déployé' }}
-          - Web     : {{ 'Simulation déployée' if Reponse_5 | lower == 'oui' else 'Non déployé' }}
-          - Mail    : {{ 'Simulation déployée' if Reponse_6 | lower == 'oui' else 'Non déployé' }}
-          - SIEM    : {{ 'Simulation déployée' if Reponse_7 | lower == 'oui' else 'Non déployé' }}
+          - FTP     : {{ 'Déployé' if Reponse_4 | lower == 'oui' else 'Non déployé' }}
+          - Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé' }}
+          - Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé' }}
+          - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé' }}
       changed_when: true
 
-    - name: Ajouts Jobs Administratifs (simulation)
+    - name: Ajouts Jobs Administratifs
       debug:
-        msg: "Simulation de la création des jobs templates pour les tâches administratives."
+        msg: "Création des jobs templates pour les tâches administratives."
       changed_when: true

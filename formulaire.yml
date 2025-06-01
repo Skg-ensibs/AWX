@@ -11,10 +11,6 @@
     Reponse_5: "Non"
     Reponse_6: "Non"
     Reponse_7: "Oui"
-    AWX_HOST: "http://127.0.0.1:8080"
-    AWX_TOKEN: "yPLLeIEXMVoEImY2Qh0ixIG78puxQA"
-    INVENTORY: "TPE-Inventaire"
-    PROJECT: "SIMON"
 
   tasks:
 
@@ -25,74 +21,67 @@
           - Postes : {{ Reponse_2 }}
           - Domaine : {{ Reponse_3 }}
 
-    - name: Configuration du domaine
-      shell: |
-        echo "Configuration du domaine {{ Reponse_3 }}..."
-        sleep 1
-      register: domaine_result
+    - name: Configuration du domaine (simulation)
+      debug:
+        msg: "Simulation de la configuration du domaine {{ Reponse_3 }}..."
       changed_when: true
 
     - name: Affichage résultat domaine
       debug:
-        var: domaine_result.stdout
+        msg: "Domaine {{ Reponse_3 }} configuré (simulation)."
 
-    - name: Gestion serveur FTP
-      shell: |
-        {% if Reponse_4 | lower == "oui" %}
-        echo "Besoin de partage de fichiers détecté : déploiement du serveur FTP."
-        sleep 1
-        {% else %}
-        echo "Aucun besoin de partage massif de fichiers : pas de serveur FTP déployé "
-        {% endif %}
-      register: ftp_result
+    - name: Gestion serveur FTP (simulation)
+      debug:
+        msg: |
+          {% if Reponse_4 | lower == "oui" %}
+          Simulation du déploiement du serveur FTP.
+          {% else %}
+          Pas de déploiement de serveur FTP nécessaire.
+          {% endif %}
       changed_when: true
 
-    - name: Gestion serveur Web 
-      shell: |
-        {% if Reponse_5 | lower == "oui" %}
-        echo "Site web requis : déploiement du serveur web."
-        sleep 1
-        {% else %}
-        echo "Pas de site web demandé : aucun serveur web déployé "
-        {% endif %}
-      register: web_result
+    - name: Gestion serveur Web (simulation)
+      debug:
+        msg: |
+          {% if Reponse_5 | lower == "oui" %}
+          Simulation du déploiement du serveur web.
+          {% else %}
+          Pas de déploiement de serveur Web nécessaire.
+          {% endif %}
       changed_when: true
 
-    - name: Gestion serveur Mail 
-      shell: |
-        {% if Reponse_6 | lower == "oui" %}
-        echo "Échange de mails requis : déploiement du serveur mail."
-        sleep 1
-        {% else %}
-        echo "Pas de service mail requis : aucun serveur mail déployé "
-        {% endif %}
-      register: mail_result
+    - name: Gestion serveur Mail (simulation)
+      debug:
+        msg: |
+          {% if Reponse_6 | lower == "oui" %}
+          Simulation du déploiement du serveur mail.
+          {% else %}
+          Pas de déploiement de serveur mail nécessaire.
+          {% endif %}
       changed_when: true
 
-    - name: Gestion supervision (SIEM)
-      shell: |
-        {% if Reponse_7 | lower == "oui" %}
-        echo "Supervision requise : déploiement de Zabbix + agents."
-        sleep 1
-        {% else %}
-        echo "Pas de supervision nécessaire : SIEM non déployé "
-        {% endif %}
-      register: siem_result
+    - name: Gestion supervision (SIEM) (simulation)
+      debug:
+        msg: |
+          {% if Reponse_7 | lower == "oui" %}
+          Simulation du déploiement de la supervision avec Zabbix.
+          {% else %}
+          Pas de déploiement de SIEM nécessaire.
+          {% endif %}
       changed_when: true
 
-    - name: Résumé final
+    - name: Résumé final de la simulation
       debug:
         msg: |
           Résumé des composants simulés :
           - Domaine : {{ Reponse_3 }}
-          - FTP     : {{ 'Déployé' if Reponse_4 | lower == 'oui' else 'Non déployé ' }}
-          - Web     : {{ 'Déployé' if Reponse_5 | lower == 'oui' else 'Non déployé ' }}
-          - Mail    : {{ 'Déployé' if Reponse_6 | lower == 'oui' else 'Non déployé ' }}
-          - SIEM    : {{ 'Déployé' if Reponse_7 | lower == 'oui' else 'Non déployé ' }}
-     changed_when: true
+          - FTP     : {{ 'Simulation déployée' if Reponse_4 | lower == 'oui' else 'Non déployé' }}
+          - Web     : {{ 'Simulation déployée' if Reponse_5 | lower == 'oui' else 'Non déployé' }}
+          - Mail    : {{ 'Simulation déployée' if Reponse_6 | lower == 'oui' else 'Non déployé' }}
+          - SIEM    : {{ 'Simulation déployée' if Reponse_7 | lower == 'oui' else 'Non déployé' }}
+      changed_when: true
 
-    - name: Ajouts Jobs Administratifs
+    - name: Ajouts Jobs Administratifs (simulation)
       debug:
-        msg: |
-          création des jobs templates pour les tâches administratives
-       changed_when: true
+        msg: "Simulation de la création des jobs templates pour les tâches administratives."
+      changed_when: true
